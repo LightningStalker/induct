@@ -53,6 +53,5 @@ int main()
   NOT = imed * TS;
   length = NOT * TS * 1000;
 
-  //The coil shall be 2.138090 in length (inches) and have 4.209364 turns.
   printf("\nThe coil shall be %.1Lf mm in length and have %.1Lf turns.\n\n", length, NOT);
 }
