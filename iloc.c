@@ -1,58 +1,56 @@
-/*
- *   iloc.c -- Air-core coil design program
- *
- *         compile with:  cc -Wall -o iloc iloc.c -lm
- *
- *  Copyright (c) 2000, Eddie Kovelan and Sam Goldwasser
- *  Dvoracek (c)2021
- */
+ /* Simple solenoidal air coil calculator
+  * compile with cc -Wall -o iloc iloc.c -lm
+  * 2021 The Lightning Stalker
+  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
-#define u 1.2566370621219E-6 // permeability of free space
+#define u 1.2566370621219E-6 // µ - permeability of free space
 
 int main()
 {
-  /*
-   *    L = inductance in microhenries,
-   *  DIA = diameter of coil.
-   *  NOT = Number Of Turns
-   *    A = area of cross section
-   *   TS = turn spacing
-   * imed = intermediate temp variable
+  // variable declarations
+  long double L, D, A, TS, l, N, i;
+
+  /*   L = target inductance
+   *   D = diameter in mm
+   *   A = area of cross section
+   *  TS = turn spacing
+   *   l = length of coil in mm
+   *   N = turns count
+   *   i = intermediate temp variable
    */
 
-  long double L, DIA, A, length, TS, NOT, imed;
+  // boiler plate
+  puts("\n \
+    iloc is a coil calculator.\n \
+    iloc will find turns count and length of a coil given the target\n \
+    inductance, desired diameter, and turns spacing (pitch).\n \
+    \n");
 
-  printf("\n \
-    **********************************************************\n \
-    *  This program finds the required number of turns and   *\n \
-    *  length for an air-core inductor with specified        *\n \
-    *  inductance (uH), radius (mm), and turn spacing (mm).  *\n \
-    *  Valid for coils where diameter = length or longer.    *\n \
-    **********************************************************\n");
-
-  printf("\nEnter inductance (uH): ");
+  // input section
+  printf("Enter target inductance (µH): ");
   scanf("%Lf", &L);
-  printf("Enter diameter of coil (mm): ");
-  scanf("%Lf", &DIA);
+  printf("Enter desired coil diameter (mm): ");
+  scanf("%Lf", &D);
   printf("Enter turn spacing (mm per turn): ");
   scanf("%Lf", &TS);
 
-  /* calculation of NOT (Number Of Turns) */
+  // begin formulas
   // first some unit conversion
-  L = L / 1000000;  // H --> µH
-  DIA = DIA / 1000; // m --> mm
-  TS = TS / 1000;   // m --> mm
+  L = L / 1000000; // H --> µH
+  D = D / 1000;    // m --> mm
+  TS = TS / 1000;  // m --> mm
 
   // Meet the meat
-  A = M_PI * powl(DIA / 2, 2);
-  imed = L * (1 / u) / A;
-  NOT = imed * TS;
-  length = NOT * TS * 1000;
+  A = M_PI * powl(D / 2, 2); // M_PI = Pi
+  i = L * (1 / u) / A;
+  N = i * TS;
+  l = N * TS * 1000;
+  // end formulas
 
-  //The coil shall be 2.138090 in length (inches) and have 4.209364 turns.
-  printf("\nThe coil shall be %.1Lf mm in length and have %.1Lf turns.\n\n", length, NOT);
+  // output section
+  printf("\nThe coil shall be %.1Lf mm in length and have %.1Lf turns.\n\n", l, N);
 }
