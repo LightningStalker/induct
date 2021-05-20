@@ -25,9 +25,6 @@ such as a trap with any kind of accuracy. Maybe it's asking a bit too much right
 now. Taking it slow and careful with the incremental progress thus far is
 producing some results albeit at such a glacial pace.
 
-Some credit is due to Samuel Goldwasser et al. whom distribute the coil.c which
-is used as a template to provide ui and output formatting.
-
 ## tankfreq
 tankfreq.c is another very simple program which will calculate LC tank circuit
 resonance frequency as might be expected. 
