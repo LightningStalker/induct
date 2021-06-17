@@ -40,6 +40,8 @@ at least consider it my gift to you as the only person who will ever read this.
 
 ## cap
 cap.c is the capacitor complement to iloc. It takes your desired capacitance
-value in picofarads and the thickness (or plate spacing in the case of air dielectric) and dielectric K constant of the dielectric material. Though the
+value in picofarads and the thickness (or plate spacing in the case of air
+dielectric) and dielectric K constant of the dielectric material. Though the
 algorithm is extremely simple, even moreso than the other calculators in this
-collection, it does speed up the process and make for less time entering formulas into a calculator (and less chance for mistakes).
+collection, it does speed up the process and make for less time entering
+formulas into a calculator (and less chance for mistakes).
