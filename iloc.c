@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define u 1.2566370621219E-6 // µ - permeability of free space
+#define u 1.2566370621219E-6 // µ - magnetic constant
 
 int main()
 {
