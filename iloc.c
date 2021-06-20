@@ -9,6 +9,14 @@
 
 #define u 1.2566370621219E-6 // µ - magnetic constant
 
+double roundval(long double inval)
+// round to 1 decimal place
+{
+  int i;
+  i = (int)(inval * 10 + .5);
+  return (double)i / 10;
+}
+
 int main()
 {
   // variable declarations
@@ -48,9 +56,10 @@ int main()
   A = M_PI * powl(D / 2, 2); // M_PI = Pi
   i = L * (1 / u) / A;
   N = i * TS;
-  l = N * TS * 1000;
+  l = roundval(N * TS * 1000);
+  i = roundval(N);
   // end formulas
 
   // output section
-  printf("\nThe coil shall be %.1Lf mm in length and have %.1Lf turns.\n\n", l, N);
+  printf("\nThe coil shall be %.1Lf mm in length and have %.1Lf turns.\n\n", l, i);
 }
