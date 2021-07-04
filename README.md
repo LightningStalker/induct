@@ -3,13 +3,13 @@ Calculators and utilities for real-world electronic design
 
 ## iloc
 iloc.c is a very simple calculator program for designing single layer air coils,
-including space wound coils having a length equal to or greater than their
-diameter. For single turn inductances and short coils, I encourage you to
-consult the fine work of the late Nagaoka who published tables and formulas for
-his correction coefficient. This was not a concern for the scope of this simple
-calculator as such inductances are not seen or desirable outside of antenna
-systems or above UHF frequencies. I may decide to revisit this should the need
-arise.
+including space wound coils having a length equal to or greater than 4 times
+their diameter. For single turn inductances and shorter coils, I encourage you
+to consult the fine work of the late Nagaoka who published tables and formulas
+for his correction coefficient. This was not a concern for the scope of this
+simple calculator as such inductances are not seen or desirable outside of
+antenna systems or above UHF frequencies. I may decide to revisit this should
+the need arise.
 
 Most calculators found online need either length or turns count to generate a
 result. As they are both mathematically related, this has been simplified to a
