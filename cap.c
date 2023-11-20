@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <unistd.h>
+#include <ctype.h>
 
 #define e 0.08854187812813 // ɛ - electric constant with cm/pF conversion
 
@@ -86,22 +87,29 @@ void cylinder()
    printf("\nThe capacitor shall be %.2Lf cm in length.\n\n", i);
 }
 
-void usage()
-{
-  puts("\
-  Valid options are:\n \
-    \n \
-    -p = square flat plate type (default)\n \
-    -c = cylinder type.\n \
-    -? = this usage text\
-  \n");
-}
-
-int main(int argc, char *argv[])
+void sphere()
 {
   // variable declarations
-  char c;
+  long double C, R;
 
+  /*   C = desired capacitance
+   *   R = radius of sphere
+   */
+
+   puts("sphere type");
+   printf("Enter target capacitance (pF): ");
+   scanf("%Lf", &C);
+
+   // begin formulas
+   R = C / (4 * M_PI * e);
+   // end formulas
+
+   // output section
+   printf("\nThe capacitor shall have a radius of %.2Lf cm.\n\n", R);
+}
+
+void usage(int status)
+{
   // boiler plate
   puts("\n \
   cap is a capacitor calculator.\n \
@@ -110,24 +118,55 @@ int main(int argc, char *argv[])
   Enter 'cap -?' for a list of command line options.\n \
   \n");
 
+  puts("\
+  Valid options are:\n \
+    \n \
+    -p = square flat plate type\n \
+    -c = cylinder type\n \
+    -s = sphere type\n \
+    -? = this usage text\
+  \n");
+
+  // handle exit status
+  if (status)
+  {
+    exit(0);
+  }
+  else
+  {
+    exit(EXIT_FAILURE);
+  }
+}
+
+int main(int argc, char *argv[])
+{
+  // variable declarations
+  char c;
+
   // get options passed at the command line
-  c = getopt(argc, argv, "pc?");
+  c = getopt(argc, argv, "pcs?");
 		switch(c)
 		{
-      case -1: // Detect the end of the options.
+/*      case -1: // Detect the end of the options.
         plate();
-        break;
+        break; */
 			case 'p':
 				plate(); // plate type
 				break;
 			case 'c':
 				cylinder(); //cylinder type
 				break;
+      case 's':
+        sphere(); // sphere type
+        break;
 			case '?':
-				usage(1);
+				usage(0);
 				break;
 			default:
-				printf ("?? invalid option 0%o ??\n", c);
+        if (!isalnum(c)) c = '?';
+        printf ("?? invalid option %c ??\n", c);
+        usage(1);
+        exit(EXIT_FAILURE);
 				break;
 		}
     exit(0);
