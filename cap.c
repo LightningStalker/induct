@@ -15,7 +15,7 @@ double roundval(long double inval)
 // round to 2 decimal places
 {
   int i;
-  i = (int)(inval * 100 + .5);
+  i = (int)(inval * 100 + 0.5);
   return (double)i / 100;
 }
 
@@ -50,7 +50,9 @@ void plate()
    // end formulas
 
    // output section
-   printf("\nThe capacitor area shall be %.2Lf cm² as in a square\nhaving %.2Lf cm length sides.\n\n", i, l);
+   printf("\n \
+    The capacitor area shall be %.2Lf cm² such as a square\n \
+    having %.2Lf cm length sides.\n\n", i, l);
 }
 
 void cylinder()
@@ -101,11 +103,32 @@ void sphere()
    scanf("%Lf", &C);
 
    // begin formulas
-   R = C / (4 * M_PI * e);
+   R = C / (4 * M_PI * e) * 2;
    // end formulas
 
    // output section
-   printf("\nThe capacitor shall have a radius of %.2Lf cm.\n\n", R);
+   printf("\nThe sphere shall have a diameter of %.2Lf cm.\n\n", R);
+}
+
+void disc()
+{
+  // variable declarations
+  long double C, R;
+
+  /*   C = desired capacitance
+   *   R = radius of disc
+   */
+
+   puts("disc type");
+   printf("Enter target capacitance (pF): ");
+   scanf("%Lf", &C);
+
+   // begin formulas
+   R = C / (8 * e) * 2;
+   // end formulas
+
+   // output section
+   printf("\nThe disc shall have a diameter of %.2Lf cm.\n\n", R);
 }
 
 void usage(int status)
@@ -118,14 +141,16 @@ void usage(int status)
   Enter 'cap -?' for a list of command line options.\n \
   \n");
 
-  puts("\
+  puts(" \
   Valid options are:\n \
     \n \
-    -p = square flat plate type\n \
+    (Specify one)\n \
+    -p = parallel plate type\n \
     -c = cylinder type\n \
     -s = sphere type\n \
-    -? = this usage text\
-  \n");
+    -d = disc type\n \
+    -? = this usage text\n \
+  ");
 
   // handle exit status
   if (status)
@@ -144,7 +169,8 @@ int main(int argc, char *argv[])
   char c;
 
   // get options passed at the command line
-  c = getopt(argc, argv, "pcs?");
+  c = getopt(argc, argv, "pcsd?");
+  if (getopt(argc, argv, "pcsd?") != -1) usage(1); // multiple opts
 		switch(c)
 		{
 /*      case -1: // Detect the end of the options.
@@ -158,6 +184,9 @@ int main(int argc, char *argv[])
 				break;
       case 's':
         sphere(); // sphere type
+        break;
+      case 'd':
+        disc(); // disc type
         break;
 			case '?':
 				usage(0);
