@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include <ctype.h>
 
-#define e 0.08854187812813 // ɛ - electric constant with cm/pF conversion
+const long double e = 0.08854187812813;  // ɛ - electric constant with cm/pF conversion
 
 double roundval(long double inval)
 // round to 2 decimal places
