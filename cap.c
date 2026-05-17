@@ -1,5 +1,5 @@
  /* Simple capacitor plate area calculator
-  * compile with cc -Wall -o cap cap.c -lm
+  * compile with cc -o cap cap.c -lm
   * 2021 The Lightning Stalker
   */
 
@@ -9,7 +9,8 @@
 #include <unistd.h>
 #include <ctype.h>
 
-const long double e = 0.08854187812813;  // ɛ - electric constant with cm/pF conversion
+/* ɛ₀ - electric constant with cm/pF conversion*/
+const double e = 0.08854187812813;
 
 double roundval(long double inval)
 // round to 2 decimal places
@@ -36,14 +37,14 @@ void plate()
    puts("Plate type");
    printf("Enter target capacitance (pF): ");
    scanf("%Lf", &C);
-   printf("Enter spacing or depth of dielectric material (cm): ");
+   printf("Enter spacing or depth of dielectric material (\u00b5m): ");
    scanf("%Lf", &d);
    printf("Enter dielectric K constant of dielectric material: ");
    scanf("%Lf", &K);
 
    // begin formulas
    i = e * K;
-   A = C * d / i;
+   A = C * d / (i * 1e4);
    i = sqrt(A);
    l = roundval(i);
    i = roundval(A);
